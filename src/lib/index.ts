@@ -1,1 +1,1 @@
-export { buildEntityClasses } from './typeorm';
+export { buildEntityClassMap } from './typeorm';
