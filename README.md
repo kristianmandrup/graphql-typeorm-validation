@@ -1,5 +1,7 @@
 # graphql-typeorm-validation
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kristianmandrup/graphql-typeorm-validation.svg)](https://greenkeeper.io/)
+
 Map GraphQL type definitions `@constaints` directives to validations in typeorm entities.
 This allows you to kep validations in sync across app layers (mutations, entities) from a single source of truth (GraphQL type definitions)
 
