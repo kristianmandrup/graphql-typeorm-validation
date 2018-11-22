@@ -12,7 +12,7 @@ import {
 import * as classDecorators from 'class-validator/decorator/decorators';
 
 // class decorator to add validate() method to a class
-export const Validator = target => {
+export const ClassValidator = target => {
   target.prototype.validate = async opts => {
     return validate(this, opts);
   };
@@ -35,6 +35,31 @@ const decorators = {
   ...classDecorators
 };
 
+export function validateProperty(
+  target: any,
+  key: string,
+  validateProp: (target: any, key: string, newVal: any) => boolean
+) {
+  let value = target[key];
+  const getter = () => {
+    return value;
+  };
+
+  const setter = newVal => {
+    validateProp(target, key, newVal);
+    value = newVal;
+  };
+
+  if (delete target[key]) {
+    Object.defineProperty(target, key, {
+      get: getter,
+      set: setter,
+      enumerable: true,
+      configurable: true
+    });
+  }
+}
+
 export const decorate = (propertiesMap, { entityClass }) => {
   const propNames = Object.keys(propertiesMap);
   propNames.map(propName => {
@@ -46,9 +71,9 @@ export const decorate = (propertiesMap, { entityClass }) => {
     decoratorKeys.map(decName => {
       const decorateArgs = decoratorMap[decName];
       const decorator = decorators[decName];
-      const target = entityClass.prototype[propName];
+      // See property decorators: https://netbasal.com/create-and-test-decorators-in-javascript-85e8d5cf879c
       const decorateMember = decorator(...decorateArgs);
-      decorateMember(target, propName);
+      decorateMember(entityClass.prototype, propName);
     });
   });
 };
@@ -60,7 +85,7 @@ export const buildEntityClassMap = (
   opts: any = {}
 ) => {
   const merge = opts.merge || deepmerge;
-  const entityDecorators = opts.classDecorators || [Validator];
+  const entityDecorators = opts.classDecorators || [ClassValidator];
 
   const entityMetaDatas = connection.entityMetaDatas.reduce((acc, metaData) => {
     const { targetName } = metaData;
