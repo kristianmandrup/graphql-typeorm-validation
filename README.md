@@ -1,6 +1,7 @@
 # graphql-typeorm-validation
 
-Map GraphQL directive validations to typeorm entities
+Map GraphQL type definitions `@constaints` directives to validations in typeorm entities.
+This allows you to kep validations in sync across app layers (mutations, entities) from a single source of truth (GraphQL type definitions)
 
 ## TypeORM Entity validation
 
@@ -72,9 +73,20 @@ const errors = await post.validate();
 errors ? handleErrors(error) : await post.save();
 ```
 
-## Resources
+## Package generator
+
+This project (package) was bootstrapped using [typescript-starter](https://github.com/bitjson/typescript-starter)
+
+## TypeORM Resources on entities metadata
 
 - [Generate entity classes via connection entities metadata](https://github.com/typeorm/typeorm/issues/3141)
 - [Entity configuration via JSON Schema](https://github.com/typeorm/typeorm/issues/1818)
 
-## License MIT
+Also see discusions on (old) issues in [graphGenTypeorm](https://github.com/jjwtay/graphGenTypeorm/issues)
+
+- [Reuse @constraint directive for adding typeorm entity field validations](https://github.com/jjwtay/graphGenTypeorm/issues/1)
+- [Building Entity classes from connection.entities metadata](https://github.com/jjwtay/graphGenTypeorm/issues/2)
+
+## License
+
+MIT
