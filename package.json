@@ -51,14 +51,14 @@
     "node": ">=8.9"
   },
   "dependencies": {
-    "@types/jest": "^23.3.9",
     "class-validator": "^0.9.1",
     "deepmerge": "^2.2.1",
     "sha.js": "^2.4.11",
-    "ts-jest": "^23.10.5",
     "typeorm": "^0.2.9"
   },
   "devDependencies": {
+    "ts-jest": "^23.10.5",    
+    "@types/jest": "^23.3.9",    
     "codecov": "^3.1.0",
     "cz-conventional-changelog": "^2.1.0",
     "gh-pages": "^2.0.0",
