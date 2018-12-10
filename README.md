@@ -5,6 +5,13 @@ This allows you to kep validations in sync across app layers (mutations, entitie
 
 Also allows decorating any type of entity model (not just typeorm) with `class-validator` validators, via GraphQL type definition constraints, converted to object form using [graphSchemaToJson](https://github.com/jjwtay/graphSchemaToJson)
 
+## Status
+
+This library has not been published yet and is still a WIP.
+Has not even been tested. At this point just a collection of functions which might be useful and should be composable enough to fit scenarios described below.
+
+For more on this, see [this typeorm issue](https://github.com/typeorm/typeorm/issues/3135#issuecomment-445998746) the objective is fully fleshed out.
+
 ## TypeORM Entity validation
 
 This library lets your wrap TypeORM `@Entity` classes with validation logic.
@@ -40,7 +47,7 @@ When calling `buildEntityClassMap` you can pass a custom `decorator` function to
 ## Usage
 
 ```js
-import { buildEntityClassMap } from 'graphql-constraint-directive/typeorm';
+import { buildEntityClassMap } from 'graphql-typeorm-validation';
 
 const entityClassMap = buildEntityClassMap(connection);
 const { Post } = entityClassMap;
@@ -64,7 +71,7 @@ No more manual sync across your entire codebase!
 The default decoration of `buildEntityClassMap` makes `async save()` and `async validate(opts)` available as instance methods on the Entity class, so that you can simplify it to:
 
 ```js
-import { buildEntityClasses } from 'graphql-constraint-directive/typeorm';
+import { buildEntityClasses } from 'graphql-typeorm-validation';
 const entityClassMap = buildEntityClassMap(connection);
 const { Post } = entityClassMap;
 
