@@ -1,7 +1,9 @@
-# graphql-typeorm-validation
+# Graphql typeorm validation
 
 Map GraphQL type definitions `@constaints` directives to validations in typeorm entities.
 This allows you to kep validations in sync across app layers (mutations, entities) from a single source of truth (GraphQL type definitions)
+
+Also allows decorating any type of entity model (not just typeorm) with `class-validator` validators, via GraphQL type definition constraints, converted to object form using [graphSchemaToJson](https://github.com/jjwtay/graphSchemaToJson)
 
 ## TypeORM Entity validation
 
